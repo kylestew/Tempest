@@ -8,6 +8,7 @@ const char* password = "monkeybusine$$";
 
 /* Server API */
 const char* serverUrl = "192.168.0.11";
+#define PORT       3000
 
 /* Pins */
 /* HOOKUP GUIDE
@@ -15,17 +16,25 @@ const char* serverUrl = "192.168.0.11";
 #define LED_INFO     5
 #define IR_OUT       4
 
+// default AC status
+int temp = 0;
+int fanSpeed = 0;
+
+WiFiClient client;
 HTU21D humidity;
 
+unsigned long lastConnectionTime = 0; // last time you connected to the server, in milliseconds
+const unsigned long pollingInterval = 10L * 1000L; // delay between updates, in milliseconds
+
 void setup() {
-  Serial.begin(9600);
+//  Serial.begin(9600); 
   
   // LED INFO
   pinMode(LED_INFO, OUTPUT);
   digitalWrite(LED_INFO, LOW);
   
   // IR LED
-  pinMode(IR_OUT, OUTPUT);      
+//  pinMode(IR_OUT, OUTPUT);      
   
   humidity.begin();
 
@@ -52,26 +61,81 @@ void setup() {
 }
 
 void loop()  {
-  digitalWrite(LED_INFO, HIGH);
+  digitalWrite(LED_INFO, HIGH); // reset
   
-  delay(2000); // poll every 10s
+  delay(2000);
 
-  WiFiClient client;
-  if (!client.connect(serverUrl, 3000)) {
-    digitalWrite(LED_INFO, LOW);
-  } else {
-    // read values
-    float humd = humidity.readHumidity();
-    float temp = humidity.readTemperature();
-    temp = temp * (9/5.0) + 32;
+//  // any data to read?  
+//  bool recording = false;
+//  byte newTemp = 0;
+//  byte newFanSpeed = 0;
+//  while (client.available()) {
+//    char c = client.read();
+//    
+//    if (c == '*' && recording) {
+//      recording = false;
+//      continue;
+//    }
+//
+//    if (recording) {
+//      if (newTemp == 0)
+//        newTemp = c;
+//      else
+//        newFanSpeed = c;
+//    }
+//    
+//    if (c == '*' && !recording) {
+//      recording = true;
+//    }
+//  }
+//  if (newTemp > 0) {
+//    if (newTemp != temp || newFanSpeed != fanSpeed) {
+//    Serial.print("New values: ");
+//    Serial.print(newTemp, DEC);
+//    Serial.print(" : ");
+//    Serial.println(newFanSpeed, DEC);
+//    
+//      temp = newTemp;
+//      fanSpeed = newFanSpeed;
+//      updateAC(temp, fanSpeed);
+//    }
+//  }
+
+  // polling interval
+//  if (millis() - lastConnectionTime > pollingInterval) {
+//    Serial.println("polling...");
+//    client.stop();
+    if (!client.connect(serverUrl, PORT)) {
+      digitalWrite(LED_INFO, LOW); // show lost connection visually
+    } else {
+      // read values
+      float humd = humidity.readHumidity();
+      float temp = humidity.readTemperature();
+      temp = temp * (9/5.0) + 32;
       
-    client.print("PUT /record?temp=");
-    client.print(temp, 1);
-    client.print("&humd=");
-    client.print(temp, 1);
-    client.println(" HTTP/1.0");
-    client.println();
-  }
+      Serial.print("temp: ");
+      Serial.println(temp, 1);
+      Serial.print("humid: ");
+      Serial.println(humd, 1);
+
+      // start request for settings
+//      client.println("GET /settings HTTP/1.1");
+//      client.println("Connection: close");
+//
+//      client.println();
+//              delay(2000);
+    
+
+      client.print("PUT /record?temp=");
+      client.print(temp, 1);
+      client.print("&humd=");
+      client.print(humd, 1);
+      client.println(" HTTP/1.0");
+      client.println();
+      
+    }
+//    lastConnectionTime = millis();
+//  }
 }
 
 /*==== AC INTERFACE ====*/
