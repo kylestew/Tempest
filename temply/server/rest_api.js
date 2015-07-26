@@ -11,12 +11,12 @@ Picker.route('/record', function(params, req, res, next) {
 });
 
 Picker.route('/settings', function(params, req, res, next) {
-  console.log("request for settings");
-
-  var temp = String.fromCharCode(80);
-  var fanSpeed = String.fromCharCode(3);
-  var buffer = new Buffer("*" + temp + "" + fanSpeed + "*", 'utf-8');
-  res.write(buffer);
-
+  var settings = Settings.findOne();
+  if (settings) {
+    var temp = String.fromCharCode(settings.temperature);
+    var fanSpeed = String.fromCharCode(settings.fanSpeed);
+    var buffer = new Buffer("*" + temp + "" + fanSpeed + "*", 'utf-8');
+    res.write(buffer);
+  }
   res.end();
 });
