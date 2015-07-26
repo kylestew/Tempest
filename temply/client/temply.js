@@ -4,6 +4,11 @@ Template.body.helpers({
   },
   currentSettings: function() {
     return Settings.findOne();
+  },
+  fanSpeedIsSelected: function(speed) {
+    var settings = Settings.findOne();
+    if (settings.fanSpeed === speed)
+      return 'selected';
   }
 });
 
@@ -11,7 +16,7 @@ Template.body.events({
   'click [data-temp-change]': function(e, tmpl) {
     e.preventDefault();
 
-    var change = parseInt(e.target.dataset.tempChange);
+    var change = parseInt(e.target.parentElement.dataset.tempChange);
     Meteor.call('changeTemperature', change);
   },
   'click [data-fanspeed-change]': function(e, tmpl) {

@@ -1,44 +1,37 @@
 <head>
   <title>Temp.ly</title>
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Temply">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link rel="apple-touch-startup-image" href="images/apple-touch-startup.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
 </head>
 
 <body>
 
-  {{#with latestRecording}}
-    {{>currentTemperature}}
-  {{/with}}
-
-  {{#with currentSettings}}
-  <div>
-    {{temperature}}
-    {{fanSpeed}}
-
-<br>
-    <button class="button-primary" data-temp-change="-1">DOWN</button>
-    <button class="button-primary" data-temp-change="1">UP</button>
-    <br>
-    <button class="button-primary" data-fanspeed-change="0">AUTO</button>
-    <button class="button-primary" data-fanspeed-change="1">HIGH</button>
-    <button class="button-primary" data-fanspeed-change="2">MED</button>
-    <button class="button-primary" data-fanspeed-change="3">LOW</button>
-    <br>
-    (show current state in button color)
-
+  <div class="display">
+    <div>
+      61f
+    </div><div>
+      23%
+    </div>
   </div>
-  {{/with}}
 
+  <div class="control">
+    <a href="#" class="left" data-temp-change="-1"><i class="fa fa-arrow-down"></i></a>
+    <div class="temp">
+      {{currentSettings.temperature}}
+    </div>
+    <a href="#" class="right" data-temp-change="1"><i class="fa fa-arrow-up"></i></a>
+  </div>
 
-  <!--
+  <div class="fan-control">
+    <button data-fanspeed-change="0" class="{{fanSpeedIsSelected 0}}">AUTO</button><button data-fanspeed-change="1" class="{{fanSpeedIsSelected 1}}">HIGH</button><button data-fanspeed-change="2" class="{{fanSpeedIsSelected 2}}">MED</button><button data-fanspeed-change="3" class="{{fanSpeedIsSelected 3}}">LOW</button>
+  </div>
 
-
-  // TODO: UP/DOWN temp buttons with range
-  // TODO: FAN settings toggle
-  // TODO: design this puppy
--->
 </body>
-
-<template name="currentTemperature">
-  <h1>{{temperature}}f</h1>
-  <h1>{{humidity}}%</h1>
-  <h6>{{createdAt}}</h6>
-</template>
