@@ -1,0 +1,19 @@
+<head>
+  <title>Temp.ly</title>
+</head>
+
+<body>
+  <h1>How hot is it?</h1>
+
+  {{#with latestRecording}}
+    {{>recordingItem}}
+  {{/with}}
+</body>
+
+<template name="recordingItem">
+  <div>
+    temp: {{temperature}}f
+    <br>
+    humd: {{humidity}}%
+  </div>
+</template>

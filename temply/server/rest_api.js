@@ -1,15 +1,20 @@
 Picker.route('/record', function(params, req, res, next) {
-  console.log("temp: " + params.query.temp);
-  console.log("humd: " + params.query.humd);
-  console.log("");
+  var data = {
+    temperature: params.query.temp,
+    humidity: params.query.humd
+  };
+  var result = Recordings.insert(data);
+
+  console.log(result + " :: " + data);
+
   res.end();
 });
 
 Picker.route('/settings', function(params, req, res, next) {
   console.log("request for settings");
 
-  var temp = String.fromCharCode(76);
-  var fanSpeed = String.fromCharCode(1);
+  var temp = String.fromCharCode(80);
+  var fanSpeed = String.fromCharCode(3);
   var buffer = new Buffer("*" + temp + "" + fanSpeed + "*", 'utf-8');
   res.write(buffer);
 

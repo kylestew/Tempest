@@ -7,8 +7,10 @@ const char* ssid = "monkey_island";
 const char* password = "monkeybusine$$";
 
 /* Server API */
-const char* serverUrl = "192.168.0.11";
-#define PORT       3000
+const char* serverUrl = "temply.meteor.com";
+#define PORT       80
+//const char* serverUrl = "192.168.0.11";
+//#define PORT       3000
 
 /* Pins */
 /* HOOKUP GUIDE
@@ -16,25 +18,22 @@ const char* serverUrl = "192.168.0.11";
 #define LED_INFO     5
 #define IR_OUT       4
 
-// default AC status
-int temp = 0;
-int fanSpeed = 0;
 
 WiFiClient client;
 HTU21D humidity;
 
-unsigned long lastConnectionTime = 0; // last time you connected to the server, in milliseconds
-const unsigned long pollingInterval = 10L * 1000L; // delay between updates, in milliseconds
+unsigned long connectionRequestStartTime = 0; // last time you connected to the server, in milliseconds
+const unsigned long connectionRequestTimeout = 10L * 1000L; // delay between updates, in milliseconds
 
 void setup() {
-//  Serial.begin(9600); 
+  Serial.begin(9600); 
   
   // LED INFO
   pinMode(LED_INFO, OUTPUT);
   digitalWrite(LED_INFO, LOW);
   
   // IR LED
-//  pinMode(IR_OUT, OUTPUT);      
+  pinMode(IR_OUT, OUTPUT);      
   
   humidity.begin();
 
@@ -61,84 +60,115 @@ void setup() {
 }
 
 void loop()  {
-  digitalWrite(LED_INFO, HIGH); // reset
+  digitalWrite(LED_INFO, HIGH);
   
-  delay(2000);
-
-//  // any data to read?  
-//  bool recording = false;
-//  byte newTemp = 0;
-//  byte newFanSpeed = 0;
-//  while (client.available()) {
-//    char c = client.read();
-//    
-//    if (c == '*' && recording) {
-//      recording = false;
-//      continue;
-//    }
-//
-//    if (recording) {
-//      if (newTemp == 0)
-//        newTemp = c;
-//      else
-//        newFanSpeed = c;
-//    }
-//    
-//    if (c == '*' && !recording) {
-//      recording = true;
-//    }
-//  }
-//  if (newTemp > 0) {
-//    if (newTemp != temp || newFanSpeed != fanSpeed) {
-//    Serial.print("New values: ");
-//    Serial.print(newTemp, DEC);
-//    Serial.print(" : ");
-//    Serial.println(newFanSpeed, DEC);
-//    
-//      temp = newTemp;
-//      fanSpeed = newFanSpeed;
-//      updateAC(temp, fanSpeed);
-//    }
-//  }
-
-  // polling interval
-//  if (millis() - lastConnectionTime > pollingInterval) {
-//    Serial.println("polling...");
-//    client.stop();
-    if (!client.connect(serverUrl, PORT)) {
-      digitalWrite(LED_INFO, LOW); // show lost connection visually
-    } else {
-      // read values
-      float humd = humidity.readHumidity();
-      float temp = humidity.readTemperature();
-      temp = temp * (9/5.0) + 32;
-      
-      Serial.print("temp: ");
-      Serial.println(temp, 1);
-      Serial.print("humid: ");
-      Serial.println(humd, 1);
-
-      // start request for settings
-//      client.println("GET /settings HTTP/1.1");
-//      client.println("Connection: close");
-//
-//      client.println();
-//              delay(2000);
+  // POLL for AC settings change
+  if (client.connect(serverUrl, PORT)) {
+    // start request for settings
+    client.println("GET /settings HTTP/1.1");
+    client.println("Accept: */*");
+    client.println("Accept-Encoding: gzip, deflate");
+    client.println("Connection: keep-alive");
+    client.println("Host: temply.meteor.com:80");
+    client.println();
+    connectionRequestStartTime = millis();
+    Serial.println("settings request sent");
     
+    // poll client for response
+    bool finished = false;
+    while (!finished) {
+      bool recording = false;
+      byte newTemp = 0;
+      byte newFanSpeed = 0;
+      while (client.available()) {
+        char c = client.read();
+        Serial.print(c);
+    
+        if (c == '*' && recording) {
+          recording = false;
+          finished = true;
+          continue; // allow client to consume remaining HTTP response
+        }
 
-      client.print("PUT /record?temp=");
-      client.print(temp, 1);
-      client.print("&humd=");
-      client.print(humd, 1);
-      client.println(" HTTP/1.0");
-      client.println();
+        // server needs to send 4 byte data block = *AB* (A = temp, B = fanSpeed)
+        if (recording) {
+          if (newTemp == 0)
+            newTemp = c;
+          else
+            newFanSpeed = c;
+        }
+        
+        if (c == '*' && !recording) {
+          recording = true;
+        }
+      }
       
+      if (finished) {
+        changeACSettings(newTemp, newFanSpeed);
+        break;
+      }
+      
+      delay(100);
+      
+      if (millis() - connectionRequestStartTime > connectionRequestTimeout) {
+        Serial.println("response timed out");
+        break; // timeout response handling
+      }
     }
-//    lastConnectionTime = millis();
-//  }
+    client.stop();
+  } else {
+    digitalWrite(LED_INFO, LOW);
+  }
+  
+  delay(6000); // seperate POLL and PUSH
+  
+  if (client.connect(serverUrl, PORT)) {
+    // read values
+    float humd = humidity.readHumidity();
+    float temp = humidity.readTemperature();
+    temp = temp * (9/5.0) + 32;
+      
+    Serial.print("temp: ");
+    Serial.println(temp, 1);
+    Serial.print("humid: ");
+    Serial.println(humd, 1);
+
+    client.print("PUT /record?temp=");
+    client.print(temp, 1);
+    client.print("&humd=");
+    client.print(humd, 1);
+    client.println(" HTTP/1.1");
+    client.println("Accept: */*");
+    client.println("Accept-Encoding: gzip, deflate");
+    client.println("Connection: keep-alive");
+    client.println("Content-Length: 0");
+    client.println("Host: temply.meteor.com:80");
+    client.println();
+  } else {
+    digitalWrite(LED_INFO, LOW);
+  }
+
+  delay(6000); // seperate POLL and PUSH
 }
 
 /*==== AC INTERFACE ====*/
+// default AC status
+int temp = 0;
+int fanSpeed = 0;
+
+void changeACSettings(byte newTemp, byte newFanSpeed) {
+  Serial.print("New values: ");
+  Serial.print(newTemp, DEC);
+  Serial.print(" : ");
+  Serial.println(newFanSpeed, DEC);
+
+  if (newTemp != temp || newFanSpeed != fanSpeed) {
+    temp = newTemp;
+    fanSpeed = newFanSpeed;
+    updateAC(temp, fanSpeed);
+  }
+}
+
 void pulseIR(long usecs) {
   cli();  // disable interrupts
  
