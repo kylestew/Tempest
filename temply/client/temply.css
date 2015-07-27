@@ -34,15 +34,15 @@ html, body {
   display: inline-block;
   font-size: 8em;
 }
-.control .left, .control .right {
+.control a {
   font-size: 4em;
   color: #eee;
   width: 120px;
 }
-.control .left {
+.control a:first-child {
   float: left;
 }
-.control .right {
+.control a:last-child {
   float: right;
 }
 

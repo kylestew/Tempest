@@ -13,3 +13,5 @@ aldeed:collection2
 skeleton:skeleton
 momentjs:moment
 fortawesome:fontawesome
+sanjo:jasmine
+velocity:html-reporter

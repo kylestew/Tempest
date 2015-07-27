@@ -3,7 +3,6 @@ Picker.route('/record', function(params, req, res, next) {
     temperature: parseFloat(params.query.temp),
     humidity: parseFloat(params.query.humd),
   };
-  console.log(data);
   var result = Recordings.insert(data);
 
   console.log(result + " :: " + data);

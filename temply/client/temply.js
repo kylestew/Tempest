@@ -7,7 +7,7 @@ Template.body.helpers({
   },
   fanSpeedIsSelected: function(speed) {
     var settings = Settings.findOne();
-    if (settings.fanSpeed === speed)
+    if (settings && settings.fanSpeed === speed)
       return 'selected';
   }
 });

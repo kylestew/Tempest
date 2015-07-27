@@ -15,19 +15,19 @@
 <body>
 
   <div class="display">
-    <div>
+    <div id="display-temperature">
       {{latestRecording.temperature}}f
-    </div><div>
+    </div><div id="display-humidity">
       {{latestRecording.humidity}}%
     </div>
   </div>
 
   <div class="control">
-    <a href="#" class="left" data-temp-change="-1"><i class="fa fa-arrow-down"></i></a>
-    <div class="temp">
+    <a href="#" data-temp-change="0"><i class="fa fa-arrow-down"></i></a>
+    <div class="temp" id="control-temperature">
       {{currentSettings.temperature}}
     </div>
-    <a href="#" class="right" data-temp-change="1"><i class="fa fa-arrow-up"></i></a>
+    <a href="#" data-temp-change="1"><i class="fa fa-arrow-up"></i></a>
   </div>
 
   <div class="fan-control">

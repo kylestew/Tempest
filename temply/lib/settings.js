@@ -24,7 +24,7 @@ Meteor.methods({
     if (settings) {
       var temp = settings.temperature;
       // settable range: 64-88
-      if (direction < 0)
+      if (direction == 0)
         temp -= 2;
       else
         temp += 2;
