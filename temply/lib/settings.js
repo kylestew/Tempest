@@ -16,6 +16,12 @@ Meteor.startup(function() {
   }
 });
 
+if (Meteor.isServer) {
+  Meteor.publish('settings', function() {
+    return Settings.find({},{limit:1}); // should only ever be one
+  })
+}
+
 Meteor.methods({
   changeTemperature: function(direction) {
     check(direction, Number);

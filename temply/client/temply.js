@@ -1,12 +1,24 @@
+Template.body.onCreated(function() {
+  this.subscribe('recordings', 1);
+  this.subscribe('settings');
+
+  this.currentRecording = function() {
+    return Recordings.findOne({},{sort: {createdAt: -1}});
+  }
+  this.settings = function() {
+    return Settings.findOne();
+  }
+});
+
 Template.body.helpers({
   latestRecording: function() {
-    return Recordings.findOne({},{sort: {createdAt: -1}});
+    return Template.instance().currentRecording();
   },
   currentSettings: function() {
-    return Settings.findOne();
+    return Template.instance().settings();
   },
   fanSpeedIsSelected: function(speed) {
-    var settings = Settings.findOne();
+    var settings = Template.instance().settings();
     if (settings && settings.fanSpeed === speed)
       return 'selected';
   }
