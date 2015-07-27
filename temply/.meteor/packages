@@ -13,3 +13,5 @@ momentjs:moment
 fortawesome:fontawesome
 sanjo:jasmine
 velocity:html-reporter
+autopublish
+insecure

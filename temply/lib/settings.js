@@ -26,7 +26,7 @@ Meteor.methods({
   changeTemperature: function(direction) {
     check(direction, Number);
 
-    var settings = Settings.findOne();
+    var settings = Settings.findOne({},{sort:{updatedAt:-1}});
     if (settings) {
       var temp = settings.temperature;
       // settable range: 64-88
@@ -43,9 +43,14 @@ Meteor.methods({
   changeFanSpeed: function(speed) {
     check(speed, Number);
 
-    var settings = Settings.findOne();
-    if (settings) {
-      return Settings.update({_id:settings._id},{$set:{fanSpeed:speed}});
+    // settable range: 1-4 (AUTO,HIGH,MED,LOW)
+    if (speed >= 0 && speed < 4) {
+      var settings = Settings.findOne({},{sort:{updatedAt:-1}});
+      if (settings) {
+        return Settings.update({_id:settings._id},{$set:{fanSpeed:speed}});
+      }
+    } else {
+      throw new Error('setting out of range');
     }
   }
 });

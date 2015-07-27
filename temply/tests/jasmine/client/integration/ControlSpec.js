@@ -28,6 +28,7 @@ describe('Temperature control', function() {
     expect(getSettings().temperature).toEqual(84);
   });
 
+// not sure why this won't work
   xit("will decrease temperature", function() {
     $(".control a:first-child").click();
     expect(getSettings().temperature).toEqual(80);
