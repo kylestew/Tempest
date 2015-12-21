@@ -1,20 +1,34 @@
+#include "HTU21D.h"
+
+HTU21D htu = HTU21D();
+
+void setup() {
+	Serial.begin(9600);
+	Serial.println("HTU21D test");
+
+	while(! htu.begin()){
+	    Serial.println("HTU21D not found");
+	    delay(1000);
+	}
+
+	Serial.println("HTU21D OK");
+}
+
+void loop() {
+	Serial.println("===================");
+	Serial.print("Hum:"); Serial.println(htu.readHumidity());
+	Serial.print("Temp:"); Serial.println(htu.readTemperature());
+	Serial.println();
+
+	delay(1000);
+}
+
+
+/*
 #include <ESP8266WiFi.h>
 #include <Wire.h>
 #include <SparkFunHTU21D.h>
 
-/* Wifi */
-const char* ssid = "monkey_island";
-const char* password = "monkeybusine$$";
-
-/* Server API */
-const char* serverUrl = "temply.meteor.com";
-#define PORT       80
-//const char* serverUrl = "192.168.0.11";
-//#define PORT       3000
-
-/* Pins */
-/* HOOKUP GUIDE
-*/
 #define LED_INFO     5
 #define IR_OUT       4
 
@@ -26,15 +40,15 @@ unsigned long connectionRequestStartTime = 0; // last time you connected to the 
 const unsigned long connectionRequestTimeout = 10L * 1000L; // delay between updates, in milliseconds
 
 void setup() {
-  Serial.begin(9600); 
-  
+  Serial.begin(9600);
+
   // LED INFO
   pinMode(LED_INFO, OUTPUT);
   digitalWrite(LED_INFO, LOW);
-  
+
   // IR LED
-  pinMode(IR_OUT, OUTPUT);      
-  
+  pinMode(IR_OUT, OUTPUT);
+
   humidity.begin();
 
   // boot up wifi
@@ -47,7 +61,7 @@ void setup() {
     // Blink the LED
     digitalWrite(LED_INFO, ledStatus); // Write LED high/low
     ledStatus = (ledStatus == HIGH) ? LOW : HIGH;
-    
+
     // blocking loops will cause SOC to reset
     delay(100);
     Serial.print(".");
@@ -61,19 +75,18 @@ void setup() {
 
 void loop()  {
   digitalWrite(LED_INFO, HIGH);
-  
+
   // POLL for AC settings change
   if (client.connect(serverUrl, PORT)) {
     // start request for settings
     client.println("GET /settings HTTP/1.1");
-    client.println("Accept: */*");
     client.println("Accept-Encoding: gzip, deflate");
     client.println("Connection: keep-alive");
     client.println("Host: temply.meteor.com:80");
     client.println();
     connectionRequestStartTime = millis();
     Serial.println("settings request sent");
-    
+
     // poll client for response
     bool finished = false;
     while (!finished) {
@@ -83,7 +96,7 @@ void loop()  {
       while (client.available()) {
         char c = client.read();
         Serial.print(c);
-    
+
         if (c == '*' && recording) {
           recording = false;
           finished = true;
@@ -97,19 +110,19 @@ void loop()  {
           else
             newFanSpeed = c;
         }
-        
+
         if (c == '*' && !recording) {
           recording = true;
         }
       }
-      
+
       if (finished) {
         changeACSettings(newTemp, newFanSpeed);
         break;
       }
-      
+
       delay(100);
-      
+
       if (millis() - connectionRequestStartTime > connectionRequestTimeout) {
         Serial.println("response timed out");
         break; // timeout response handling
@@ -119,15 +132,15 @@ void loop()  {
   } else {
     digitalWrite(LED_INFO, LOW);
   }
-  
+
   delay(6000); // seperate POLL and PUSH
-  
+
   if (client.connect(serverUrl, PORT)) {
     // read values
     float humd = humidity.readHumidity();
     float temp = humidity.readTemperature();
     temp = temp * (9/5.0) + 32;
-      
+
     Serial.print("temp: ");
     Serial.println(temp, 1);
     Serial.print("humid: ");
@@ -138,7 +151,6 @@ void loop()  {
     client.print("&humd=");
     client.print(humd, 1);
     client.println(" HTTP/1.1");
-    client.println("Accept: */*");
     client.println("Accept-Encoding: gzip, deflate");
     client.println("Connection: keep-alive");
     client.println("Content-Length: 0");
@@ -150,8 +162,9 @@ void loop()  {
 
   delay(6000); // seperate POLL and PUSH
 }
-
+*/
 /*==== AC INTERFACE ====*/
+/*
 // default AC status
 int temp = 0;
 int fanSpeed = 0;
@@ -171,18 +184,18 @@ void changeACSettings(byte newTemp, byte newFanSpeed) {
 
 void pulseIR(long usecs) {
   cli();  // disable interrupts
- 
+
   while (usecs > 0) {
     // 38 kHz is about 13 microseconds high and 13 microseconds low
    digitalWrite(IR_OUT, HIGH);  // this takes about 3 microseconds to happen
    delayMicroseconds(10);         // hang out for 10 microseconds, you can also change this to 9 if its not working
    digitalWrite(IR_OUT, LOW);   // this also takes about 3 microseconds
    delayMicroseconds(10);         // hang out for 10 microseconds, you can also change this to 9 if its not working
- 
+
    // so 26 microseconds altogether
    usecs -= 26;
   }
- 
+
   sei();
 }
 
@@ -191,7 +204,7 @@ void sendIRByte(byte bite) {
   for (int i = 0; i < 8; i++) {
     // 16 cycles ON * 26.3 = 420
     pulseIR(420);
-    
+
     // 0: 46 cycles OFF * 26.3 = 1200
     // 1: 16 cycles OFF * 26.3 = 420
     uint16_t usec = bite & _BV(i) ? 1200 : 420;
@@ -204,27 +217,27 @@ void sendIRByte(byte bite) {
 void updateAC(byte temp, byte fanSpeed) {
   // http://old.ercoupe.com/audio/FujitsuIR.pdf
   // I'm using opposite endianess from this guide
-  // carrier frequency: 38kHz 
+  // carrier frequency: 38kHz
   // carrier period: 26.3uSec
-  
+
   // LEADER - start communication
   // 125 cycles carrier on
   // 62 cycles carrier off
   pulseIR(3288); // 125 * 26.3 = ~3288
   delayMicroseconds(1630); // 62 * 26.3 = ~1630
-  
+
   // marker code (5 bytes)
   sendIRByte(0x14);
   sendIRByte(0x63);
   sendIRByte(0x00);
   sendIRByte(0x10);
   sendIRByte(0x10); // full command mode
-  
+
   // always same
   sendIRByte(0xFE);
   sendIRByte(0x09);
   sendIRByte(0x30);
-  
+
   // temperature
   // 64=0x2 --- 88=0xE
   temp = ((temp-64)/2) + 0x2;
@@ -237,10 +250,10 @@ void updateAC(byte temp, byte fanSpeed) {
 
   // timer
   sendIRByte(0x01);
-  
+
   // swing/fan speed
   sendIRByte(fanSpeed);
-  
+
   // timer toggle
   sendIRByte(0x0);
   sendIRByte(0x0);
@@ -252,10 +265,11 @@ void updateAC(byte temp, byte fanSpeed) {
   // sum of words 8 to 16 == 0xXX00 (mod 256 == 0)
   uint8_t sum = (0x20 + fanSpeed + 0x01 + temp + 0x30) % 256;
   sendIRByte(256 - sum);
-  
+
   // TRAILER
   // 16 cycles carrier on
   // at least 305 cycles carrier off
   pulseIR(420); // 16 * 26.3 = 420
   delayMicroseconds(8000); // 305 * 26.3 = ~8000
 }
+*/
