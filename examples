@@ -1,0 +1,9 @@
+#!/bin/bash
+
+http -f GET https://api.particle.io/v1/devices/180029000347343138333038/humd\?access_token\=f0bf0a23be388b43f630aa372b702415f7667ff5
+http -f GET https://api.particle.io/v1/devices/180029000347343138333038/temp\?access_token\=f0bf0a23be388b43f630aa372b702415f7667ff5
+
+http -f POST https://api.particle.io/v1/devices/180029000347343138333038/writeTo access_token=f0bf0a23be388b43f630aa372b702415f7667ff5 args="24:3:1"
+
+
+
