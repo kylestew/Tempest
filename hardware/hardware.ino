@@ -26,6 +26,7 @@ void setup() {
 
 	// setup IR function
 	Particle.function("writeTo", updateThermostat);
+	Particle.function("turnOff", turnOff);
 }
 
 void loop() {
@@ -36,19 +37,31 @@ void loop() {
 }
 
 int updateThermostat(String command) {
-	// TODO: how to get useful data from this command
-	/* FORMAT:
-	  TEMP|FANSPEED
-		4201 = 42c / 1 (slow)
+	/* FORMAT: 1 byte per value
+	  MASTER|TEMP|FANSPEED
 	*/
 
 	Serial.println(command);
 
-	// temp: 64-88deg (will cap)
-	// fanSpeed: 0 - auto, 1 - high, 2 - med, 3 - low, 4 - quiet
-	double temp = 88;
-	double fanSpeed = 1;
-  updateAC(temp, fanSpeed);
+	// parse into components
+	int idx0 = command.indexOf(',');
+	int idx1 = command.indexOf(',', idx0+1);
+	int idx2 = command.indexOf(',', idx1+1);
+	int master = atoi(command.substring(0,idx0));
+	int temp = atoi(command.substring(idx0+1,idx1));
+	int fanSpeed = atoi(command.substring(idx1+1,idx2));
+
+	/*if (master == 0) {
+		Serial.println("master");
+	}
+	if (temp == 80) {
+		Serial.println("temp");
+	}
+	if (fanSpeed == 2) {
+		Serial.println("fanSpeed");
+	}*/
+
+  updateAC(master, temp, fanSpeed);
 
 	return 0;
 }
@@ -85,9 +98,10 @@ void sendIRByte(byte bite) {
   }
 }
 
+// masterControl: 0 - auto, 1 - cool, 2 - dry, 3 - fan, 4 - heat
 // temp: 64-88deg (will cap)
 // fanSpeed: 0 - auto, 1 - high, 2 - med, 3 - low, 4 - quiet
-void updateAC(byte temp, byte fanSpeed) {
+void updateAC(byte masterControl, byte temp, byte fanSpeed) {
   // http://old.ercoupe.com/audio/FujitsuIR.pdf
   // I'm using opposite endianess from this guide
   // carrier frequency: 38kHz
@@ -121,8 +135,8 @@ void updateAC(byte temp, byte fanSpeed) {
   temp <<= 4;
   sendIRByte(temp);
 
-  // timer
-  sendIRByte(0x01);
+  // timer/master control
+  sendIRByte(masterControl);
 
   // swing/fan speed
   sendIRByte(fanSpeed);
@@ -136,7 +150,7 @@ void updateAC(byte temp, byte fanSpeed) {
 
   // checksum
   // sum of words 8 to 16 == 0xXX00 (mod 256 == 0)
-  uint8_t sum = (0x20 + fanSpeed + 0x01 + temp + 0x30) % 256;
+  uint8_t sum = (0x20 + fanSpeed + masterControl + temp + 0x30) % 256;
   sendIRByte(256 - sum);
 
   // TRAILER
@@ -144,4 +158,29 @@ void updateAC(byte temp, byte fanSpeed) {
   // at least 305 cycles carrier off
   pulseIR(420); // 16 * 26.3 = 420
   delayMicroseconds(8000); // 305 * 26.3 = ~8000
+}
+
+int turnOff(String command) {
+	// 0 0 1 0 1 0 0 0 - 1 1 0 0 0 1 1 0 - 0 0 0 0 0 0 0 0 - 0 0 0 0 1 0 0 0 - 0 0 0 0 1 0 0 0 - 0 1 0 0 0 0 0 0 - 1 0 1 1 1 1 1 1
+  // LEADER - start communication
+  // 125 cycles carrier on
+  // 62 cycles carrier off
+  pulseIR(3288); // 125 * 26.3 = ~3288
+  delayMicroseconds(1630); // 62 * 26.3 = ~1630
+
+  sendIRByte(0x14);
+  sendIRByte(0x63);
+  sendIRByte(0x00);
+  sendIRByte(0x08);
+  sendIRByte(0x08);
+  sendIRByte(0x02);
+  sendIRByte(0xFD);
+
+  // TRAILER
+  // 16 cycles carrier on
+  // at least 305 cycles carrier off
+  pulseIR(420); // 16 * 26.3 = 420
+  delayMicroseconds(8000); // 305 * 26.3 = ~8000
+
+	return 0;
 }

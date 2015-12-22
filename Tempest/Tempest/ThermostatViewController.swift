@@ -1,28 +1,27 @@
 import UIKit
 
-class ThermostatViewController: UIViewController, AuthDelegate {
+class ThermostatViewController: UIViewController, AuthDelegate, ThermostatDelegate {
     
     var thermostat = Thermostat()
-    var sparkDevice:SparkDevice?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        thermostat.temperature.producer.startWithNext { (temperature) -> () in
+            print("temp: \(temperature)")
+        }
+    }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         // check if logged in
-        if (!SparkCloud.sharedInstance().isLoggedIn || thermostat.sparkId == "") {
+        if (!SparkCloud.sharedInstance().isLoggedIn) {
             // popup auth
             showAuth()
         } else {
-            // try to connect to device
-            SparkCloud.sharedInstance().getDevice(thermostat.sparkId) { (sparkDevice, error) -> Void in
-                if sparkDevice == nil {
-                    print(error)
-                    self.showAuth()
-                } else {
-                    self.sparkDevice = sparkDevice
-                    self.bindView()
-                }
-            }
+            thermostat.delegate = self
+            thermostat.connect()
         }
     }
     
@@ -33,12 +32,19 @@ class ThermostatViewController: UIViewController, AuthDelegate {
     
     func didAuthWithDevice(device: SparkDevice) {
         thermostat.sparkId = device.id
-        sparkDevice = device
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func bindView() {
-        print(sparkDevice)
+    func thermostatDidDisconnect() {
+        showAuth()
     }
+    
+    
+    @IBAction func action(sender: AnyObject) {
+        thermostat.changeTargetTemperature(72)
+        thermostat.changeMasterMode(0)
+        thermostat.changeFanSpeed(0)
+    }
+    
     
 }
