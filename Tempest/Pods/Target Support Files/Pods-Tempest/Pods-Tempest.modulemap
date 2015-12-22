@@ -1,0 +1,6 @@
+framework module Pods_Tempest {
+  umbrella header "Pods-Tempest-umbrella.h"
+
+  export *
+  module * { export * }
+}
