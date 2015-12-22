@@ -85,14 +85,12 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Tempest/AFNetworking.framework"
-  install_framework "Pods-Tempest/Box.framework"
   install_framework "Pods-Tempest/ReactiveCocoa.framework"
   install_framework "Pods-Tempest/Result.framework"
   install_framework "Pods-Tempest/Spark_SDK.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Tempest/AFNetworking.framework"
-  install_framework "Pods-Tempest/Box.framework"
   install_framework "Pods-Tempest/ReactiveCocoa.framework"
   install_framework "Pods-Tempest/Result.framework"
   install_framework "Pods-Tempest/Spark_SDK.framework"

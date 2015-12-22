@@ -20,20 +20,18 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Box (1.2.2)
-  - ReactiveCocoa (3.0.0):
-    - ReactiveCocoa/UI (= 3.0.0)
-    - Result (~> 0.4.1)
-  - ReactiveCocoa/Core (3.0.0):
+  - ReactiveCocoa (4.0.4-alpha-4):
+    - ReactiveCocoa/UI (= 4.0.4-alpha-4)
+    - Result (~> 1.0)
+  - ReactiveCocoa/Core (4.0.4-alpha-4):
     - ReactiveCocoa/no-arc
-    - Result (~> 0.4.1)
-  - ReactiveCocoa/no-arc (3.0.0):
-    - Result (~> 0.4.1)
-  - ReactiveCocoa/UI (3.0.0):
+    - Result (~> 1.0)
+  - ReactiveCocoa/no-arc (4.0.4-alpha-4):
+    - Result (~> 1.0)
+  - ReactiveCocoa/UI (4.0.4-alpha-4):
     - ReactiveCocoa/Core
-    - Result (~> 0.4.1)
-  - Result (0.4.4):
-    - Box (~> 1.2)
+    - Result (~> 1.0)
+  - Result (1.0.1)
   - Spark-SDK (0.3.4):
     - Spark-SDK/Helpers (= 0.3.4)
     - Spark-SDK/SDK (= 0.3.4)
@@ -43,14 +41,13 @@ PODS:
     - Spark-SDK/Helpers
 
 DEPENDENCIES:
-  - ReactiveCocoa
+  - ReactiveCocoa (= 4.0.4-alpha-4)
   - Spark-SDK
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
-  ReactiveCocoa: 5c4710e2f00f69f39a7f135d1f3ab48f8dace034
-  Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
+  ReactiveCocoa: e459ea92099447802df20c4735e31e8139b06094
+  Result: caef80340451e1f07492fa1e89117f83613bce24
   Spark-SDK: f5dad30a5afa319f43ca570a64f241c73c693641
 
 COCOAPODS: 0.39.0

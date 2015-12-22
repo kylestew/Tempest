@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2791C0291C28E33D002A52B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C0281C28E33D002A52B3 /* AppDelegate.swift */; };
-		2791C02B1C28E33D002A52B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C02A1C28E33D002A52B3 /* ViewController.swift */; };
+		2791C02B1C28E33D002A52B3 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C02A1C28E33D002A52B3 /* AuthViewController.swift */; };
 		2791C02E1C28E33D002A52B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2791C02C1C28E33D002A52B3 /* Main.storyboard */; };
 		2791C0301C28E33D002A52B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2791C02F1C28E33D002A52B3 /* Assets.xcassets */; };
 		2791C0331C28E33D002A52B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2791C0311C28E33D002A52B3 /* LaunchScreen.storyboard */; };
 		2791C03E1C28E33D002A52B3 /* TempestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C03D1C28E33D002A52B3 /* TempestTests.swift */; };
 		2791C0491C28E33D002A52B3 /* TempestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C0481C28E33D002A52B3 /* TempestUITests.swift */; };
+		27DBDFD71C28F6A8006E13BD /* Thermostat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBDFD61C28F6A8006E13BD /* Thermostat.swift */; };
+		27DBDFD91C28F70F006E13BD /* ThermostatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */; };
 		8A712465FBE7A2DF0FB7CD35 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E3D65B0E4A826DCD724CB6 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,9 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27162F1A1C28EB8200FB754E /* Spark-SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spark-SDK.h"; sourceTree = "<group>"; };
 		2791C0251C28E33D002A52B3 /* Tempest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tempest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2791C0281C28E33D002A52B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2791C02A1C28E33D002A52B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2791C02A1C28E33D002A52B3 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		2791C02D1C28E33D002A52B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2791C02F1C28E33D002A52B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2791C0321C28E33D002A52B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -48,6 +51,8 @@
 		2791C0441C28E33D002A52B3 /* TempestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2791C0481C28E33D002A52B3 /* TempestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempestUITests.swift; sourceTree = "<group>"; };
 		2791C04A1C28E33D002A52B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27DBDFD61C28F6A8006E13BD /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
+		27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatViewController.swift; sourceTree = "<group>"; };
 		72E3D65B0E4A826DCD724CB6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABC4C3EC8E778EEB25752FD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FFF2DDB2E09FA10C136BBA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -112,9 +117,12 @@
 		2791C0271C28E33D002A52B3 /* Tempest */ = {
 			isa = PBXGroup;
 			children = (
+				27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */,
+				27DBDFD61C28F6A8006E13BD /* Thermostat.swift */,
+				2791C02A1C28E33D002A52B3 /* AuthViewController.swift */,
 				2791C0281C28E33D002A52B3 /* AppDelegate.swift */,
-				2791C02A1C28E33D002A52B3 /* ViewController.swift */,
 				2791C02C1C28E33D002A52B3 /* Main.storyboard */,
+				27162F1A1C28EB8200FB754E /* Spark-SDK.h */,
 				2791C02F1C28E33D002A52B3 /* Assets.xcassets */,
 				2791C0311C28E33D002A52B3 /* LaunchScreen.storyboard */,
 				2791C0341C28E33D002A52B3 /* Info.plist */,
@@ -331,8 +339,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2791C02B1C28E33D002A52B3 /* ViewController.swift in Sources */,
+				2791C02B1C28E33D002A52B3 /* AuthViewController.swift in Sources */,
+				27DBDFD71C28F6A8006E13BD /* Thermostat.swift in Sources */,
 				2791C0291C28E33D002A52B3 /* AppDelegate.swift in Sources */,
+				27DBDFD91C28F70F006E13BD /* ThermostatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +489,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tempest/Spark-SDK.h";
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Debug;
 		};
@@ -491,6 +503,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tempest/Spark-SDK.h";
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Release;
 		};

@@ -3,7 +3,7 @@
 # Uncomment this line if you're using Swift
 use_frameworks!
 
-pod "ReactiveCocoa"
+pod "ReactiveCocoa", '4.0.4-alpha-4'
 pod "Spark-SDK"
 
 target 'Tempest' do

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KIX-dO-t3K">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Auth View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="auth" id="BYZ-38-t0r" customClass="AuthViewController" customModule="Tempest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,73 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkn-z3-dKv">
+                                <rect key="frame" x="220" y="293" width="160" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="W24-X2-a7H"/>
+                                    <constraint firstAttribute="height" constant="30" id="ySb-ST-lKn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYh-jh-xNP">
+                                <rect key="frame" x="190" y="345" width="221" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="hga-f6-NA6"/>
+                                    <constraint firstAttribute="width" constant="221" id="ktm-w3-2wN"/>
+                                </constraints>
+                                <state key="normal" title="Auth Me Cap'n"/>
+                                <connections>
+                                    <action selector="auth:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rrQ-uJ-1Yp"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bux-4b-Bbm">
+                                <rect key="frame" x="220" y="240" width="160" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="0Xj-Ln-Z9h"/>
+                                    <constraint firstAttribute="height" constant="30" id="x3g-5E-kah"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xkn-z3-dKv" firstAttribute="top" secondItem="Bux-4b-Bbm" secondAttribute="bottom" constant="23" id="AyX-qi-2Ub"/>
+                            <constraint firstItem="pYh-jh-xNP" firstAttribute="top" secondItem="xkn-z3-dKv" secondAttribute="bottom" constant="22" id="Fqi-Gk-PBQ"/>
+                            <constraint firstItem="pYh-jh-xNP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="60" id="Hvd-wp-8k2"/>
+                            <constraint firstItem="Bux-4b-Bbm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YM9-dq-ws6"/>
+                            <constraint firstItem="xkn-z3-dKv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aPc-ef-KjY"/>
+                            <constraint firstItem="pYh-jh-xNP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qeV-e9-uSA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="Bux-4b-Bbm" id="gcg-zw-PQO"/>
+                        <outlet property="password" destination="xkn-z3-dKv" id="yfe-ik-lBi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1655" y="-65"/>
+        </scene>
+        <!--Thermostat View Controller-->
+        <scene sceneID="cqv-kP-b1i">
+            <objects>
+                <viewController storyboardIdentifier="thermostat" id="KIX-dO-t3K" customClass="ThermostatViewController" customModule="Tempest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aed-kV-pE8"/>
+                        <viewControllerLayoutGuide type="bottom" id="g1f-M3-bhz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W5M-9M-heh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1is-vT-fwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1655" y="630"/>
         </scene>
     </scenes>
 </document>

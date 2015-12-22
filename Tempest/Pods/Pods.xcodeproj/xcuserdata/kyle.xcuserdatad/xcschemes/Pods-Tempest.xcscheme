@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E2C5E304E14C49A990B313D3'
+               BlueprintIdentifier = '443244B02257524F96D4F218'
                BlueprintName = 'Pods-Tempest'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_Tempest.framework'>
