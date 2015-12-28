@@ -81,6 +81,9 @@ class Thermostat {
         // start update loops
         NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: Selector("processSettingsQueue"), userInfo: nil, repeats: true)
         NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("updateTemperature"), userInfo: nil, repeats: true)
+        
+        // grab temperature right away
+        updateTemperature()
     }
     
     func connect() {
@@ -171,14 +174,12 @@ class Thermostat {
             let args = [ "\(masterControl.value.rawValue),\(targetTemp.value),\(fanSpeed.value.rawValue)" ];
             
             print("sending: \(args)")
-            /*
             sparkDevice?.callFunction("writeTo", withArguments:args, completion: { (resultCode : NSNumber!, error : NSError!) -> Void in
                 if (error != nil) {
                     print(error)
 //                    self.delegate?.thermostatDidDisconnect()
                 }
             })
-*/
         
             hasSettingsUpdate = false
             if let task = taskId {
