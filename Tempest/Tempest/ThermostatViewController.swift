@@ -66,7 +66,7 @@ class ThermostatViewController: UIViewController, AuthDelegate, ThermostatDelega
         super.viewDidAppear(animated)
        
         // check if logged in
-        if (!SparkCloud.sharedInstance().isLoggedIn) {
+        if (!SparkCloud.sharedInstance().isLoggedIn && !thermostat.isDemoMode) {
             // popup auth
             showAuth()
         } else {
@@ -77,11 +77,16 @@ class ThermostatViewController: UIViewController, AuthDelegate, ThermostatDelega
     
     func showAuth() {
         let auth = AuthViewController.createWithDelegate(self)
-        presentViewController(auth, animated: true, completion: nil)
+        presentViewController(auth, animated: false, completion: nil)
     }
     
     func didAuthWithDevice(device: SparkDevice) {
         thermostat.sparkId = device.id
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func didSelectDemoMode() {
+        thermostat.isDemoMode = true
         dismissViewControllerAnimated(true, completion: nil)
     }
     

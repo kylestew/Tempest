@@ -2,6 +2,7 @@ import UIKit
 
 protocol AuthDelegate {
     func didAuthWithDevice(device: SparkDevice)
+    func didSelectDemoMode()
 }
 
 class AuthViewController: UIViewController {
@@ -52,6 +53,10 @@ class AuthViewController: UIViewController {
                 self.presentViewController(actionSheet, animated: true, completion: nil)
             }
         }
+    }
+    
+    @IBAction func demoMode(sender: AnyObject) {
+        authDelegate?.didSelectDemoMode()
     }
     
 }

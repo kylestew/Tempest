@@ -35,11 +35,18 @@ enum FanSpeeds: Int {
 
 class Thermostat : NSObject, WCSessionDelegate {
     let kSparkId = "spark_id"
+    let kStoredDemoMode = "stored_demo_mode"
     let kStoredTemperatureValue = "stored_temperature_value"
     let kStoredTargetValue = "stored_target_value"
     let kStoredMasterControl = "stored_master_control"
     let kStoredFanSpeed = "stored_fan_speed"
     
+    var isDemoMode = false {
+        didSet {
+            NSUserDefaults.standardUserDefaults().setBool(isDemoMode, forKey: kStoredDemoMode)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
     var temperature = MutableProperty<Double>(0.0)
     var targetTemp = MutableProperty<Int>(70)
     var masterControl = MutableProperty<MasterModes>(.Cool)
@@ -67,6 +74,9 @@ class Thermostat : NSObject, WCSessionDelegate {
         // load cached values for immediate display
         let defs = NSUserDefaults.standardUserDefaults()
         self.temperature.value = defs.doubleForKey(kStoredTemperatureValue)
+        if (defs.valueForKey(kStoredDemoMode) != nil) {
+            self.isDemoMode = NSUserDefaults.standardUserDefaults().boolForKey(kStoredDemoMode)
+        }
         if (defs.valueForKey(kStoredTargetValue) != nil) {
             self.targetTemp.value = NSUserDefaults.standardUserDefaults().integerForKey(kStoredTargetValue)
         }
@@ -82,12 +92,12 @@ class Thermostat : NSObject, WCSessionDelegate {
         }
         
         // start update loops
-//        NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: Selector("processSettingsQueue"), userInfo: nil, repeats: true)
-//        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("updateTemperature"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: Selector("processSettingsQueue"), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("updateTemperature"), userInfo: nil, repeats: true)
         
         // grab temperature right away
-//        updateTemperature()
-        
+        updateTemperature()
+    
         // WatchKit session
         if (WCSession.isSupported()) {
             let session = WCSession.defaultSession()
@@ -98,7 +108,12 @@ class Thermostat : NSObject, WCSessionDelegate {
     }
     
     func connect() {
-        if (sparkId == "") {
+        guard isDemoMode == false else {
+            // no need to connect
+            return
+        }
+        guard sparkId != "" else {
+            // no registered Spark ID, can't connect to it
             delegate?.thermostatDidDisconnect()
             return
         }
@@ -116,19 +131,23 @@ class Thermostat : NSObject, WCSessionDelegate {
     
     // MARK: Temperature readings
     @objc func updateTemperature() {
-        sparkDevice?.getVariable("temp", completion: { (result:AnyObject!, error:NSError!) -> Void in
-            if (error != nil) {
-                self.delegate?.thermostatDidDisconnect()
-            } else {
-                if let temp = result as? Double {
-                    self.temperature.value = temp * 9.0/5 + 32.0
-                    
-                    NSUserDefaults.standardUserDefaults().setValue(self.temperature.value, forKey: self.kStoredTemperatureValue)
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                    self.updateWatchData()
+        if isDemoMode {
+            self.temperature.value = 72.0
+        } else {
+            sparkDevice?.getVariable("temp", completion: { (result:AnyObject!, error:NSError!) -> Void in
+                if (error != nil) {
+                    self.delegate?.thermostatDidDisconnect()
+                } else {
+                    if let temp = result as? Double {
+                        self.temperature.value = temp * 9.0/5 + 32.0
+                        
+                        NSUserDefaults.standardUserDefaults().setValue(self.temperature.value, forKey: self.kStoredTemperatureValue)
+                        NSUserDefaults.standardUserDefaults().synchronize()
+                        self.updateWatchData()
+                    }
                 }
-            }
-        })
+            })
+        }
     }
     
     // MARK: Settings accessors
@@ -176,6 +195,11 @@ class Thermostat : NSObject, WCSessionDelegate {
     }
     
     @objc private func processSettingsQueue() {
+        guard isDemoMode == false else {
+            // no need to transmi
+            return
+        }
+        
         if (hasSettingsUpdate) {
             
             // TODO: handle OFF condition
