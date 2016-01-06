@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkn-z3-dKv">
-                                <rect key="frame" x="220" y="226" width="160" height="30"/>
+                                <rect key="frame" x="220" y="228" width="160" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="W24-X2-a7H"/>
                                     <constraint firstAttribute="height" constant="30" id="ySb-ST-lKn"/>
@@ -27,23 +27,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYh-jh-xNP">
-                                <rect key="frame" x="190" y="278" width="221" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYh-jh-xNP">
+                                <rect key="frame" x="221" y="280" width="160" height="40"/>
                                 <color key="backgroundColor" red="0.22190451622009277" green="0.53750544786453247" blue="0.99016731977462769" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="hga-f6-NA6"/>
+                                    <constraint firstAttribute="height" constant="40" id="hga-f6-NA6"/>
                                     <constraint firstAttribute="width" constant="221" id="ktm-w3-2wN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                                 <state key="normal" title="LOGIN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ktm-w3-2wN"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="auth:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rrQ-uJ-1Yp"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bux-4b-Bbm">
-                                <rect key="frame" x="220" y="178" width="160" height="30"/>
+                                <rect key="frame" x="220" y="180" width="160" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="0Xj-Ln-Z9h"/>
                                     <constraint firstAttribute="height" constant="30" id="x3g-5E-kah"/>
@@ -52,7 +57,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wtz-7E-gNR">
-                                <rect key="frame" x="240" y="340" width="120" height="30"/>
+                                <rect key="frame" x="240" y="338" width="120" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="7Je-h8-Jp1"/>
                                     <constraint firstAttribute="height" constant="30" id="HAZ-yI-nD7"/>
@@ -72,6 +77,7 @@
                             <constraint firstItem="Wtz-7E-gNR" firstAttribute="top" secondItem="pYh-jh-xNP" secondAttribute="bottom" constant="18" id="DQw-LE-fsV"/>
                             <constraint firstItem="pYh-jh-xNP" firstAttribute="top" secondItem="xkn-z3-dKv" secondAttribute="bottom" constant="22" id="Fqi-Gk-PBQ"/>
                             <constraint firstItem="pYh-jh-xNP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Hvd-wp-8k2"/>
+                            <constraint firstItem="pYh-jh-xNP" firstAttribute="width" secondItem="xkn-z3-dKv" secondAttribute="width" id="WQA-cx-PhJ"/>
                             <constraint firstItem="Bux-4b-Bbm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YM9-dq-ws6"/>
                             <constraint firstItem="xkn-z3-dKv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aPc-ef-KjY"/>
                             <constraint firstItem="Wtz-7E-gNR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cQR-Ba-L1K"/>
@@ -185,7 +191,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aj7-1w-Znf">
                                 <rect key="frame" x="139" y="390" width="82" height="72"/>
-                                <color key="backgroundColor" red="0.22190451622009277" green="0.53750544786453247" blue="0.99016731977462769" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.19998660683631897" green="0.52466803789138794" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="ZdV-DR-Fbo"/>
                                     <constraint firstAttribute="width" constant="82" id="waG-UH-Ddo"/>
@@ -205,6 +211,9 @@
                                             <constraint firstAttribute="width" constant="40" id="zlv-4m-M62"/>
                                         </constraints>
                                         <state key="normal" image="fan_dot"/>
+                                        <connections>
+                                            <action selector="setFanToQuite:" destination="KIX-dO-t3K" eventType="touchUpInside" id="wMY-mX-c76"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXN-fh-yCm">
                                         <rect key="frame" x="40" y="0.0" width="40" height="40"/>
@@ -213,6 +222,9 @@
                                             <constraint firstAttribute="width" constant="40" id="aXv-8Q-Yl3"/>
                                         </constraints>
                                         <state key="normal" image="fan_dot"/>
+                                        <connections>
+                                            <action selector="setFanToLow:" destination="KIX-dO-t3K" eventType="touchUpInside" id="tAU-Sp-OjP"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVU-of-mdT">
                                         <rect key="frame" x="120" y="0.0" width="40" height="40"/>
@@ -221,6 +233,9 @@
                                             <constraint firstAttribute="width" constant="40" id="nhn-st-5AX"/>
                                         </constraints>
                                         <state key="normal" image="fan_dot"/>
+                                        <connections>
+                                            <action selector="setFanToHigh:" destination="KIX-dO-t3K" eventType="touchUpInside" id="dZb-VC-f8E"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKH-Ti-CBu">
                                         <rect key="frame" x="80" y="0.0" width="40" height="40"/>
@@ -229,6 +244,9 @@
                                             <constraint firstAttribute="height" constant="40" id="wCc-ja-gkQ"/>
                                         </constraints>
                                         <state key="normal" image="fan_dot"/>
+                                        <connections>
+                                            <action selector="setFanToMed:" destination="KIX-dO-t3K" eventType="touchUpInside" id="qAb-nt-f6d"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
