@@ -1,5 +1,6 @@
 import Foundation
 import ReactiveCocoa
+import WatchConnectivity
 
 protocol ThermostatDelegate {
     func thermostatDidDisconnect()
@@ -32,7 +33,7 @@ enum FanSpeeds: Int {
     case Quiet = 4
 }
 
-class Thermostat {
+class Thermostat : NSObject, WCSessionDelegate {
     let kSparkId = "spark_id"
     let kStoredTemperatureValue = "stored_temperature_value"
     let kStoredTargetValue = "stored_target_value"
@@ -54,12 +55,14 @@ class Thermostat {
         }
     }
     
-    init() {
+    override init() {
         if let sid = NSUserDefaults.standardUserDefaults().stringForKey(kSparkId) {
            sparkId = sid
         } else {
             sparkId = ""
         }
+        
+        super.init()
         
         // load cached values for immediate display
         let defs = NSUserDefaults.standardUserDefaults()
@@ -84,6 +87,14 @@ class Thermostat {
         
         // grab temperature right away
         updateTemperature()
+        
+        // WatchKit session
+        if (WCSession.isSupported()) {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+            updateWatchData()
+        }
     }
     
     func connect() {
@@ -111,8 +122,10 @@ class Thermostat {
             } else {
                 if let temp = result as? Double {
                     self.temperature.value = temp * 9.0/5 + 32.0
+                    
                     NSUserDefaults.standardUserDefaults().setValue(self.temperature.value, forKey: self.kStoredTemperatureValue)
                     NSUserDefaults.standardUserDefaults().synchronize()
+                    self.updateWatchData()
                 }
             }
         })
@@ -133,6 +146,7 @@ class Thermostat {
             
             NSUserDefaults.standardUserDefaults().setValue(self.targetTemp.value, forKey: self.kStoredTargetValue)
             NSUserDefaults.standardUserDefaults().synchronize()
+            self.updateWatchData()
         }
     }
     
@@ -185,6 +199,29 @@ class Thermostat {
             if let task = taskId {
                 UIApplication.sharedApplication().endBackgroundTask(task)
             }
+        }
+    }
+    
+    // MARK: WatchKit connectivity
+    func updateWatchData() {
+        let session = WCSession.defaultSession()
+        var context = session.applicationContext
+        
+        context["temperature"] = temperature.value
+        context["targetTemp"] = targetTemp.value
+        
+        print("Sending data to WK: \(context)")
+        
+        do {
+            try session.updateApplicationContext(context)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        if let temp = applicationContext["targetTemp"] as? Int {
+            changeTargetTemperature(temp)
         }
     }
     

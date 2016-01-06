@@ -204,6 +204,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="actualTempLabel" destination="S0s-dH-ESf" id="oQ4-0M-YfG"/>
+                        <outlet property="fanSpeedSegmentedControl" destination="gX0-Q0-W8v" id="yXs-6l-6fs"/>
                         <outlet property="masterControlButton" destination="PHM-uU-czU" id="wux-OJ-5CB"/>
                         <outlet property="targetTempLabel" destination="iaQ-3K-vNy" id="0X6-JZ-rBO"/>
                     </connections>

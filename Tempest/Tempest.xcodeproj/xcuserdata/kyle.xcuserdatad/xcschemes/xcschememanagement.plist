@@ -4,10 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Complication - TempestWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>Glance - TempestWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>Tempest.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>TempestWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -23,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>2791C0431C28E33D002A52B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>279573A01C31C525004E824F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -14,6 +14,15 @@
 		2791C0331C28E33D002A52B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2791C0311C28E33D002A52B3 /* LaunchScreen.storyboard */; };
 		2791C03E1C28E33D002A52B3 /* TempestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C03D1C28E33D002A52B3 /* TempestTests.swift */; };
 		2791C0491C28E33D002A52B3 /* TempestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C0481C28E33D002A52B3 /* TempestUITests.swift */; };
+		279573A51C31C525004E824F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279573A31C31C525004E824F /* Interface.storyboard */; };
+		279573A71C31C525004E824F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279573A61C31C525004E824F /* Assets.xcassets */; };
+		279573AE1C31C525004E824F /* TempestWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 279573AD1C31C525004E824F /* TempestWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		279573B31C31C525004E824F /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279573B21C31C525004E824F /* InterfaceController.swift */; };
+		279573B51C31C525004E824F /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279573B41C31C525004E824F /* ExtensionDelegate.swift */; };
+		279573B71C31C525004E824F /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279573B61C31C525004E824F /* GlanceController.swift */; };
+		279573B91C31C525004E824F /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279573B81C31C525004E824F /* ComplicationController.swift */; };
+		279573BB1C31C525004E824F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279573BA1C31C525004E824F /* Assets.xcassets */; };
+		279573BF1C31C525004E824F /* TempestWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 279573A11C31C525004E824F /* TempestWatch.app */; };
 		27DBDFD71C28F6A8006E13BD /* Thermostat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBDFD61C28F6A8006E13BD /* Thermostat.swift */; };
 		27DBDFD91C28F70F006E13BD /* ThermostatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */; };
 		8A712465FBE7A2DF0FB7CD35 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E3D65B0E4A826DCD724CB6 /* Pods.framework */; };
@@ -34,7 +43,46 @@
 			remoteGlobalIDString = 2791C0241C28E33D002A52B3;
 			remoteInfo = Tempest;
 		};
+		279573AF1C31C525004E824F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2791C01D1C28E33D002A52B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 279573AC1C31C525004E824F;
+			remoteInfo = "TempestWatch Extension";
+		};
+		279573BD1C31C525004E824F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2791C01D1C28E33D002A52B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 279573A01C31C525004E824F;
+			remoteInfo = TempestWatch;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		279573C51C31C525004E824F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				279573AE1C31C525004E824F /* TempestWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		279573C71C31C525004E824F /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				279573BF1C31C525004E824F /* TempestWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		27162F1A1C28EB8200FB754E /* Spark-SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spark-SDK.h"; sourceTree = "<group>"; };
@@ -51,6 +99,17 @@
 		2791C0441C28E33D002A52B3 /* TempestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2791C0481C28E33D002A52B3 /* TempestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempestUITests.swift; sourceTree = "<group>"; };
 		2791C04A1C28E33D002A52B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		279573A11C31C525004E824F /* TempestWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempestWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		279573A41C31C525004E824F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		279573A61C31C525004E824F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		279573A81C31C525004E824F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		279573AD1C31C525004E824F /* TempestWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TempestWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		279573B21C31C525004E824F /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		279573B41C31C525004E824F /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		279573B61C31C525004E824F /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		279573B81C31C525004E824F /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		279573BA1C31C525004E824F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		279573BC1C31C525004E824F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27DBDFD61C28F6A8006E13BD /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
 		27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatViewController.swift; sourceTree = "<group>"; };
 		72E3D65B0E4A826DCD724CB6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +140,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		279573AA1C31C525004E824F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -98,6 +164,8 @@
 				2791C0271C28E33D002A52B3 /* Tempest */,
 				2791C03C1C28E33D002A52B3 /* TempestTests */,
 				2791C0471C28E33D002A52B3 /* TempestUITests */,
+				279573A21C31C525004E824F /* TempestWatch */,
+				279573B11C31C525004E824F /* TempestWatch Extension */,
 				2791C0261C28E33D002A52B3 /* Products */,
 				D897806129E989DFE3392D5F /* Pods */,
 				20CFBB80348296FF307E118F /* Frameworks */,
@@ -110,6 +178,8 @@
 				2791C0251C28E33D002A52B3 /* Tempest.app */,
 				2791C0391C28E33D002A52B3 /* TempestTests.xctest */,
 				2791C0441C28E33D002A52B3 /* TempestUITests.xctest */,
+				279573A11C31C525004E824F /* TempestWatch.app */,
+				279573AD1C31C525004E824F /* TempestWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,8 +187,8 @@
 		2791C0271C28E33D002A52B3 /* Tempest */ = {
 			isa = PBXGroup;
 			children = (
-				27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */,
 				27DBDFD61C28F6A8006E13BD /* Thermostat.swift */,
+				27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */,
 				2791C02A1C28E33D002A52B3 /* AuthViewController.swift */,
 				2791C0281C28E33D002A52B3 /* AppDelegate.swift */,
 				2791C02C1C28E33D002A52B3 /* Main.storyboard */,
@@ -148,6 +218,29 @@
 			path = TempestUITests;
 			sourceTree = "<group>";
 		};
+		279573A21C31C525004E824F /* TempestWatch */ = {
+			isa = PBXGroup;
+			children = (
+				279573A31C31C525004E824F /* Interface.storyboard */,
+				279573A61C31C525004E824F /* Assets.xcassets */,
+				279573A81C31C525004E824F /* Info.plist */,
+			);
+			path = TempestWatch;
+			sourceTree = "<group>";
+		};
+		279573B11C31C525004E824F /* TempestWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				279573B21C31C525004E824F /* InterfaceController.swift */,
+				279573B41C31C525004E824F /* ExtensionDelegate.swift */,
+				279573B61C31C525004E824F /* GlanceController.swift */,
+				279573B81C31C525004E824F /* ComplicationController.swift */,
+				279573BA1C31C525004E824F /* Assets.xcassets */,
+				279573BC1C31C525004E824F /* Info.plist */,
+			);
+			path = "TempestWatch Extension";
+			sourceTree = "<group>";
+		};
 		D897806129E989DFE3392D5F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,10 +263,12 @@
 				2791C0231C28E33D002A52B3 /* Resources */,
 				5ADF8970164915888D9D4626 /* Embed Pods Frameworks */,
 				F47BBF28B8554D780A078024 /* Copy Pods Resources */,
+				279573C71C31C525004E824F /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				279573BE1C31C525004E824F /* PBXTargetDependency */,
 			);
 			name = Tempest;
 			productName = Tempest;
@@ -216,6 +311,40 @@
 			productReference = 2791C0441C28E33D002A52B3 /* TempestUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		279573A01C31C525004E824F /* TempestWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 279573C61C31C525004E824F /* Build configuration list for PBXNativeTarget "TempestWatch" */;
+			buildPhases = (
+				2795739F1C31C525004E824F /* Resources */,
+				279573C51C31C525004E824F /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				279573B01C31C525004E824F /* PBXTargetDependency */,
+			);
+			name = TempestWatch;
+			productName = TempestWatch;
+			productReference = 279573A11C31C525004E824F /* TempestWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		279573AC1C31C525004E824F /* TempestWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 279573C41C31C525004E824F /* Build configuration list for PBXNativeTarget "TempestWatch Extension" */;
+			buildPhases = (
+				279573A91C31C525004E824F /* Sources */,
+				279573AA1C31C525004E824F /* Frameworks */,
+				279573AB1C31C525004E824F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TempestWatch Extension";
+			productName = "TempestWatch Extension";
+			productReference = 279573AD1C31C525004E824F /* TempestWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -228,6 +357,7 @@
 				TargetAttributes = {
 					2791C0241C28E33D002A52B3 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = YD46CQMTUW;
 					};
 					2791C0381C28E33D002A52B3 = {
 						CreatedOnToolsVersion = 7.2;
@@ -236,6 +366,14 @@
 					2791C0431C28E33D002A52B3 = {
 						CreatedOnToolsVersion = 7.2;
 						TestTargetID = 2791C0241C28E33D002A52B3;
+					};
+					279573A01C31C525004E824F = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = YD46CQMTUW;
+					};
+					279573AC1C31C525004E824F = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = YD46CQMTUW;
 					};
 				};
 			};
@@ -255,6 +393,8 @@
 				2791C0241C28E33D002A52B3 /* Tempest */,
 				2791C0381C28E33D002A52B3 /* TempestTests */,
 				2791C0431C28E33D002A52B3 /* TempestUITests */,
+				279573A01C31C525004E824F /* TempestWatch */,
+				279573AC1C31C525004E824F /* TempestWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -281,6 +421,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2795739F1C31C525004E824F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279573A71C31C525004E824F /* Assets.xcassets in Resources */,
+				279573A51C31C525004E824F /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		279573AB1C31C525004E824F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279573BB1C31C525004E824F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +519,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		279573A91C31C525004E824F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				279573B51C31C525004E824F /* ExtensionDelegate.swift in Sources */,
+				279573B91C31C525004E824F /* ComplicationController.swift in Sources */,
+				279573B31C31C525004E824F /* InterfaceController.swift in Sources */,
+				279573B71C31C525004E824F /* GlanceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -374,6 +542,16 @@
 			isa = PBXTargetDependency;
 			target = 2791C0241C28E33D002A52B3 /* Tempest */;
 			targetProxy = 2791C0451C28E33D002A52B3 /* PBXContainerItemProxy */;
+		};
+		279573B01C31C525004E824F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 279573AC1C31C525004E824F /* TempestWatch Extension */;
+			targetProxy = 279573AF1C31C525004E824F /* PBXContainerItemProxy */;
+		};
+		279573BE1C31C525004E824F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 279573A01C31C525004E824F /* TempestWatch */;
+			targetProxy = 279573BD1C31C525004E824F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -392,6 +570,14 @@
 				2791C0321C28E33D002A52B3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		279573A31C31C525004E824F /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				279573A41C31C525004E824F /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -485,6 +671,7 @@
 			baseConfigurationReference = FFF2DDB2E09FA10C136BBA90 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Tempest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest;
@@ -499,6 +686,7 @@
 			baseConfigurationReference = 7ABC4C3EC8E778EEB25752FD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Tempest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest;
@@ -556,6 +744,76 @@
 			};
 			name = Release;
 		};
+		279573C01C31C525004E824F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = TempestWatch_Extension;
+				INFOPLIST_FILE = TempestWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		279573C11C31C525004E824F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = TempestWatch_Extension;
+				INFOPLIST_FILE = TempestWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		279573C21C31C525004E824F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "TempestWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		279573C31C31C525004E824F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "TempestWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.invntapps.Tempest.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -594,6 +852,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		279573C41C31C525004E824F /* Build configuration list for PBXNativeTarget "TempestWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				279573C21C31C525004E824F /* Debug */,
+				279573C31C31C525004E824F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		279573C61C31C525004E824F /* Build configuration list for PBXNativeTarget "TempestWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				279573C01C31C525004E824F /* Debug */,
+				279573C11C31C525004E824F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

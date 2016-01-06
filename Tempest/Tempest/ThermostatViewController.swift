@@ -7,6 +7,7 @@ class ThermostatViewController: UIViewController, AuthDelegate, ThermostatDelega
     @IBOutlet weak var actualTempLabel: UILabel!
     @IBOutlet weak var targetTempLabel: UILabel!
     @IBOutlet weak var masterControlButton: UIButton!
+    @IBOutlet weak var fanSpeedSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,10 +18,12 @@ class ThermostatViewController: UIViewController, AuthDelegate, ThermostatDelega
         thermostat.targetTemp.producer.startWithNext { (target) -> () in
             self.targetTempLabel.text = String(format: "%d", target)
         }
-        thermostat.masterControl.producer.startWithNext{ mode in
+        thermostat.masterControl.producer.startWithNext { mode in
             self.masterControlButton.setTitle(mode.displayName(), forState: .Normal)
         }
-        // FAN
+        thermostat.fanSpeed.producer.startWithNext { fanSpeed in
+            self.fanSpeedSegmentedControl.selectedSegmentIndex = fanSpeed.rawValue
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
