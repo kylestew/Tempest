@@ -1,2 +1,2 @@
-# Temperature monitoring and control with the ESP8266
+# Temperature monitoring and control with Particle Photon
 

@@ -9,17 +9,17 @@ protocol ThermostatDelegate {
 enum MasterModes: Int {
     // masterControl: 0 - auto, 1 - cool, 2 - dry, 3 - fan, 4 - heat
     case Off = -1
-    case Heating = 0
-    case Cooling = 1
+    case Heat = 0
+    case Cool = 1
     
     func displayName() -> String {
         switch self {
         case .Off:
             return "off"
-        case .Heating:
-            return "heating"
-        case .Cooling:
-            return "cooling"
+        case .Heat:
+            return "heat"
+        case .Cool:
+            return "cool"
         }
     }
 }
@@ -28,7 +28,7 @@ enum FanSpeeds: Int {
     // fanSpeed: 0 - auto, 1 - high, 2 - med, 3 - low, 4 - quiet
     case Auto = 0
     case High = 1
-    case Med = 2
+    case Medium = 2
     case Low = 3
     case Quiet = 4
 }
@@ -42,7 +42,7 @@ class Thermostat : NSObject, WCSessionDelegate {
     
     var temperature = MutableProperty<Double>(0.0)
     var targetTemp = MutableProperty<Int>(70)
-    var masterControl = MutableProperty<MasterModes>(.Cooling)
+    var masterControl = MutableProperty<MasterModes>(.Cool)
     var fanSpeed = MutableProperty<FanSpeeds>(.Auto)
     
     var delegate:ThermostatDelegate?
@@ -82,11 +82,11 @@ class Thermostat : NSObject, WCSessionDelegate {
         }
         
         // start update loops
-        NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: Selector("processSettingsQueue"), userInfo: nil, repeats: true)
-        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("updateTemperature"), userInfo: nil, repeats: true)
+//        NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: Selector("processSettingsQueue"), userInfo: nil, repeats: true)
+//        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: Selector("updateTemperature"), userInfo: nil, repeats: true)
         
         // grab temperature right away
-        updateTemperature()
+//        updateTemperature()
         
         // WatchKit session
         if (WCSession.isSupported()) {

@@ -25,6 +25,7 @@
 		279573BF1C31C525004E824F /* TempestWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 279573A11C31C525004E824F /* TempestWatch.app */; };
 		27DBDFD71C28F6A8006E13BD /* Thermostat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBDFD61C28F6A8006E13BD /* Thermostat.swift */; };
 		27DBDFD91C28F70F006E13BD /* ThermostatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */; };
+		27F8150A1C3CC64400FD5CB4 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F815091C3CC64400FD5CB4 /* UIColorExtension.swift */; };
 		8A712465FBE7A2DF0FB7CD35 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E3D65B0E4A826DCD724CB6 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,7 @@
 		279573BC1C31C525004E824F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27DBDFD61C28F6A8006E13BD /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
 		27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatViewController.swift; sourceTree = "<group>"; };
+		27F815091C3CC64400FD5CB4 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		72E3D65B0E4A826DCD724CB6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABC4C3EC8E778EEB25752FD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FFF2DDB2E09FA10C136BBA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,7 +189,8 @@
 		2791C0271C28E33D002A52B3 /* Tempest */ = {
 			isa = PBXGroup;
 			children = (
-				27DBDFD61C28F6A8006E13BD /* Thermostat.swift */,
+				27F815071C3CC56E00FD5CB4 /* Helpers */,
+				27F815081C3CC57200FD5CB4 /* Core */,
 				27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */,
 				2791C02A1C28E33D002A52B3 /* AuthViewController.swift */,
 				2791C0281C28E33D002A52B3 /* AppDelegate.swift */,
@@ -239,6 +242,22 @@
 				279573BC1C31C525004E824F /* Info.plist */,
 			);
 			path = "TempestWatch Extension";
+			sourceTree = "<group>";
+		};
+		27F815071C3CC56E00FD5CB4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				27F815091C3CC64400FD5CB4 /* UIColorExtension.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		27F815081C3CC57200FD5CB4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				27DBDFD61C28F6A8006E13BD /* Thermostat.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		D897806129E989DFE3392D5F /* Pods */ = {
@@ -498,6 +517,7 @@
 			files = (
 				2791C02B1C28E33D002A52B3 /* AuthViewController.swift in Sources */,
 				27DBDFD71C28F6A8006E13BD /* Thermostat.swift in Sources */,
+				27F8150A1C3CC64400FD5CB4 /* UIColorExtension.swift in Sources */,
 				2791C0291C28E33D002A52B3 /* AppDelegate.swift in Sources */,
 				27DBDFD91C28F70F006E13BD /* ThermostatViewController.swift in Sources */,
 			);
@@ -860,6 +880,7 @@
 				279573C31C31C525004E824F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		279573C61C31C525004E824F /* Build configuration list for PBXNativeTarget "TempestWatch" */ = {
 			isa = XCConfigurationList;
@@ -868,6 +889,7 @@
 				279573C11C31C525004E824F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
