@@ -105,7 +105,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="360" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6Z-5J-ec3">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6Z-5J-ec3" customClass="TemperatureDialView" customModule="Tempest" customModuleProvider="target">
                                 <rect key="frame" x="64" y="44" width="232" height="232"/>
                                 <color key="backgroundColor" red="0.22190451622009277" green="0.53750544786453247" blue="0.99016731977462769" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -300,9 +300,9 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="6HF-vG-4cH"/>
-                                <exclude reference="jtm-4v-y0e"/>
                                 <exclude reference="ZWT-3P-21E"/>
                                 <exclude reference="bYE-dF-7Yz"/>
+                                <exclude reference="jtm-4v-y0e"/>
                             </mask>
                         </variation>
                     </view>
@@ -316,6 +316,7 @@
                         <outlet property="fan3Button" destination="ZVU-of-mdT" id="oOU-bw-4BO"/>
                         <outlet property="fanAutoButton" destination="aj7-1w-Znf" id="ZLh-WI-doF"/>
                         <outlet property="masterControlButton" destination="PHM-uU-czU" id="wux-OJ-5CB"/>
+                        <outlet property="temperatureDialView" destination="m6Z-5J-ec3" id="7RP-JN-8rd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1is-vT-fwS" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27162DD01C42D1A900A0EFBE /* TemperatureDialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27162DCF1C42D1A900A0EFBE /* TemperatureDialView.swift */; };
 		2791C0291C28E33D002A52B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C0281C28E33D002A52B3 /* AppDelegate.swift */; };
 		2791C02B1C28E33D002A52B3 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791C02A1C28E33D002A52B3 /* AuthViewController.swift */; };
 		2791C02E1C28E33D002A52B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2791C02C1C28E33D002A52B3 /* Main.storyboard */; };
@@ -86,6 +87,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		27162DCF1C42D1A900A0EFBE /* TemperatureDialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperatureDialView.swift; sourceTree = "<group>"; };
 		27162F1A1C28EB8200FB754E /* Spark-SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spark-SDK.h"; sourceTree = "<group>"; };
 		2791C0251C28E33D002A52B3 /* Tempest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tempest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2791C0281C28E33D002A52B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				27F815071C3CC56E00FD5CB4 /* Helpers */,
 				27F815081C3CC57200FD5CB4 /* Core */,
+				27162DCF1C42D1A900A0EFBE /* TemperatureDialView.swift */,
 				27DBDFD81C28F70F006E13BD /* ThermostatViewController.swift */,
 				2791C02A1C28E33D002A52B3 /* AuthViewController.swift */,
 				2791C0281C28E33D002A52B3 /* AppDelegate.swift */,
@@ -520,6 +523,7 @@
 				27F8150A1C3CC64400FD5CB4 /* UIColorExtension.swift in Sources */,
 				2791C0291C28E33D002A52B3 /* AppDelegate.swift in Sources */,
 				27DBDFD91C28F70F006E13BD /* ThermostatViewController.swift in Sources */,
+				27162DD01C42D1A900A0EFBE /* TemperatureDialView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

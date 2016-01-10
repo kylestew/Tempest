@@ -4,4 +4,4 @@
 ![hardware](hardware_proto.jpg)
 
 ## App Mockup
-![mockup](app_mock.jpg)
+![mockup](app_mock.png)

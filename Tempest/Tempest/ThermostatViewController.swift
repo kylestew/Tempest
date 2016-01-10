@@ -12,10 +12,7 @@ class ThermostatViewController: UIViewController, AuthDelegate, ThermostatDelega
     @IBOutlet weak var fan3Button: UIButton!
     var fanButtons:[UIButton]!
     
-//    @IBOutlet weak var actualTempLabel: UILabel!
-//    @IBOutlet weak var targetTempLabel: UILabel!
-//    @IBOutlet weak var fanSpeedSegmentedControl: UISegmentedControl!
-    
+    @IBOutlet weak var temperatureDialView: TemperatureDialView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +28,8 @@ class ThermostatViewController: UIViewController, AuthDelegate, ThermostatDelega
         // easy access
         fanButtons = [ fan0Button, fan1Button, fan2Button, fan3Button ]
         
-        
-//        thermostat.temperature.producer.startWithNext { (temperature) -> () in
-//            self.actualTempLabel.text = String(format: "%0.0f", temperature)
-//        }
-//        thermostat.targetTemp.producer.startWithNext { (target) -> () in
-//            self.targetTempLabel.text = String(format: "%d", target)
-//        }
-        
+        // bind thermostat
+        temperatureDialView.thermostat = thermostat
         thermostat.masterControl.producer.startWithNext { mode in
             self.masterControlButton.setTitle(mode.displayName().uppercaseString, forState: .Normal)
             switch (mode) {
