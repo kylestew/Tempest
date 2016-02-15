@@ -16,82 +16,80 @@ class TemperatureDialView: UIView {
     }
     
     // TODO: add gesture input for temp change
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        prepareUI()
-//    }
-//   
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        prepareUI()
-//    }
-//    
-//    func prepareUI() {
-//    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = UIColor.clearColor()
+        self.clipsToBounds = false
+    }
+   
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     
-    var trackLayer = CAShapeLayer()
-    
-    override func layoutSublayersOfLayer(layer: CALayer) {
-        super.layoutSublayersOfLayer(layer)
-        
-        if (layer != self.layer) {
-            print("ADFSADFS")
-        }
-        
-        // DIAL TRACK
-        // need to redo shape size
-        let shrink = bounds.size.width - CGFloat(round(bounds.size.width * 0.9))
-        let rect = CGRectInset(bounds, shrink, shrink)
-        let path = UIBezierPath(ovalInRect: rect)
-        // TODO: add tick marks?
-        trackLayer.path = path.CGPath
-        trackLayer.fillColor = UIColor.clearColor().CGColor
-        trackLayer.strokeColor = UIColor(white: 1.0, alpha: 0.35).CGColor
-        trackLayer.lineWidth = 3.0
-        // reframe
-        trackLayer.frame = layer.bounds
-        if (trackLayer.superlayer != layer) {
-            layer.addSublayer(trackLayer)
-        }
-        
-        
-        // TODO:
-        // current temp tick mark
-        // current temp set control point
-        
-        
+        backgroundColor = UIColor.clearColor()
+        self.clipsToBounds = false
+    }
+
+    override func drawRect(rect: CGRect) {
+        drawWidget(rect, backColor: UIColor(red: 0.239, green: 0.549, blue: 0.973, alpha: 1.000))
     }
     
-    var setToLabel = UILabel()
-    var setTempLabel = UILabel()
-    var currentTempLabel = UILabel()
-    
-    override func layoutSubviews() {
-        // style main dial
-        backgroundColor = UIColor(hex: 0x3d8cf8)
-        layer.cornerRadius = self.frame.size.width/2.0
-        layer.shadowOpacity = 0.2
-        layer.shadowOffset = CGSizeMake(4, 4)
-        layer.shadowRadius = 14.0
+    // MARK: COPY/PASE from PaintCode
+    func drawWidget(rect: CGRect, backColor: UIColor) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()
         
-        // SET TO
-        if (setToLabel.superview != self) {
-            setToLabel.text = "SET TO"
-            setToLabel.textAlignment = .Center
-            self.addSubview(setToLabel)
-        }
-        setToLabel.frame = CGRectMake(self.center.x-40.0, self.center.y-80.0, 80.0, 32.0)
-        setToLabel.backgroundColor = UIColor.redColor()
+        //// Color Declarations
+        let color = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 0.880)
         
-        // CURRENT SET
+        //// Shadow Declarations
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+        shadow.shadowOffset = CGSizeMake(4.1, 4.1)
+        shadow.shadowBlurRadius = 14
         
-        // CURRENT TEMP MARK
-        // tricky circle math
+        //// Oval Drawing
+        let ovalPath = UIBezierPath(ovalInRect: CGRectMake(rect.minX + 15, rect.minY + 15, rect.width - 30, rect.height - 30))
+        CGContextSaveGState(context)
+        CGContextSetShadowWithColor(context, shadow.shadowOffset, shadow.shadowBlurRadius, (shadow.shadowColor as! UIColor).CGColor)
+        backColor.setFill()
+        ovalPath.fill()
+        CGContextRestoreGState(context)
         
         
         
+        //// Oval 2 Drawing
+        let oval2Path = UIBezierPath(ovalInRect: CGRectMake(rect.minX + 42.5, rect.minY + 42.5, 215.5, 215.5))
+        color.setStroke()
+        oval2Path.lineWidth = 3
+        oval2Path.stroke()
         
         
+        //// Rectangle Drawing
+        CGContextSaveGState(context)
+        CGContextTranslateCTM(context, rect.minX + 99.85, rect.minY + 245.5)
+        CGContextRotateCTM(context, -60 * CGFloat(M_PI) / 180)
+        
+        let rectanglePath = UIBezierPath(rect: CGRectMake(-12, -0.5, 24, 1))
+        color.setStroke()
+        rectanglePath.lineWidth = 3
+        rectanglePath.stroke()
+        
+        CGContextRestoreGState(context)
+        
+        
+        //// Rectangle 2 Drawing
+        CGContextSaveGState(context)
+        CGContextTranslateCTM(context, rect.minX + 201.93, rect.minY + 245.86)
+        CGContextRotateCTM(context, 60 * CGFloat(M_PI) / 180)
+        
+        let rectangle2Path = UIBezierPath(rect: CGRectMake(-12, -0.5, 24, 1))
+        color.setStroke()
+        rectangle2Path.lineWidth = 3
+        rectangle2Path.stroke()
+        
+        CGContextRestoreGState(context)
     }
     
 }
+
